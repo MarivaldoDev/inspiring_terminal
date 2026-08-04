@@ -1,17 +1,16 @@
-import requests
-from pprint import pprint
-from random import randint
 import asyncio
-from tradutor import translate_text
 
-choice = randint(0, 50)
+from rich.console import Console
 
-url = "https://zenquotes.io/api/quotes/&keyword=inspiration"
+from src.config.config import Config
+from src.config.tradutor import translate_text
 
-response = requests.get(url)
-json = response.json()
-
-sentence = json[choice]["q"]
+config = Config()
+console = Console()
 
 
-print(asyncio.run(translate_text(sentence)))
+sentence, author = config.sentence_day()
+result = asyncio.run(translate_text(sentence))
+
+
+console.print(f"{result}\n- {author}", style="bold green")
