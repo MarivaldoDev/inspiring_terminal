@@ -6,25 +6,21 @@ from inspire_term.ui import ConsoleRenderer
 
 def main() -> None:
     renderer = ConsoleRenderer()
+    quote_service = QuoteService()
+    translator = TranslatorService()
 
     try:
-        quote_service = QuoteService()
+        quote = quote_service.get_quote()
     except QuoteFetchError as e:
         renderer.error(str(e))
         return
 
     try:
-        translator = TranslatorService()
+        translated_quote = translator.translate(quote.text)
     except TranslationError as e:
-        renderer.error(str(e))
-        return
-
-    quote = quote_service.get_quote()
-
-    translated_quote = translator.translate(quote.text)
+        translated_quote = quote.text
 
     renderer.show(translated_quote, quote.author)
-
 
 
 if __name__ == "__main__":
