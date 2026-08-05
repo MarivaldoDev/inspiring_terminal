@@ -6,9 +6,12 @@ from inspire_term.exceptions import TranslationError
 
 
 class TranslatorService:
+    def __init__(self) -> None:
+        self.translator = Translator()
+
     async def _translate_text(self, text: str) -> str:
         try:
-            async with Translator() as translator:
+            async with self.translator as translator:
                 result = await translator.translate(text, dest="pt")
 
                 return result.text

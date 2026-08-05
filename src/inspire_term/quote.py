@@ -14,7 +14,9 @@ class QuoteService:
         try:
             keyword = choice(self.keywords)
 
-            response = requests.get(self.url_base + f"&keyword={choice(keyword)}")
+            response = requests.get(self.url_base + f"&keyword={keyword}")
+            response.raise_for_status()
+
             data = response.json()
             idx = randint(0, len(data) - 1)
 

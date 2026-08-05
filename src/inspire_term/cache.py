@@ -7,8 +7,8 @@ from inspire_term.models import Quote
 
 
 class QuoteCache:
-    def __init__(self) -> None:
-        self.cache_dir = Path.home() / ".cache" / "inspiring-terminal"
+    def __init__(self, cache_dir: Path | None = None) -> None:
+        self.cache_dir = cache_dir or Path.home() / ".cache" / "inspiring-terminal"
         self.cache_file = self.cache_dir / "quote.json"
 
     def ensure_cache_dir(self) -> None:
@@ -32,9 +32,16 @@ class QuoteCache:
         if not self.cache_file.exists():
             return None
 
-        with self.cache_file.open("r", encoding="utf-8") as file:
-            data = json.load(file)
+        try:
+            with self.cache_file.open("r", encoding="utf-8") as file:
+                data = json.load(file)
 
-        data.pop("date")
+            cached_date = data.pop("date")
 
-        return Quote(**data)
+            if cached_date != date.today().isoformat():
+                return None
+
+            return Quote(**data)
+
+        except (json.JSONDecodeError, KeyError, TypeError):
+            return None

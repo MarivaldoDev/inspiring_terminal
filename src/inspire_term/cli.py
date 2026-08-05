@@ -30,7 +30,7 @@ def main() -> None:
 
         cache.save(quote)
 
-    renderer.show(quote.translated, quote.author)
+    renderer.show(quote.translated or quote.text, quote.author)
 
 
 if __name__ == "__main__":
