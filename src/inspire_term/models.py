@@ -5,3 +5,4 @@ from dataclasses import dataclass
 class Quote:
     text: str
     author: str
+    translated: str | None = None

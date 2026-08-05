@@ -1,3 +1,6 @@
+from dataclasses import replace
+
+from inspire_term.cache import QuoteCache
 from inspire_term.exceptions import QuoteFetchError, TranslationError
 from inspire_term.quote import QuoteService
 from inspire_term.translator import TranslatorService
@@ -8,19 +11,26 @@ def main() -> None:
     renderer = ConsoleRenderer()
     quote_service = QuoteService()
     translator = TranslatorService()
+    cache = QuoteCache()
 
-    try:
-        quote = quote_service.get_quote()
-    except QuoteFetchError as e:
-        renderer.error(str(e))
-        return
+    quote = cache.load()
 
-    try:
-        translated_quote = translator.translate(quote.text)
-    except TranslationError as e:
-        translated_quote = quote.text
+    if quote is None:
+        try:
+            quote = quote_service.get_quote()
+        except QuoteFetchError as e:
+            renderer.error(str(e))
+            return
 
-    renderer.show(translated_quote, quote.author)
+        try:
+            translated = translator.translate(quote.text)
+            quote = replace(quote, translated=translated)
+        except TranslationError:
+            quote = replace(quote, translated=quote.text)
+
+        cache.save(quote)
+
+    renderer.show(quote.translated, quote.author)
 
 
 if __name__ == "__main__":

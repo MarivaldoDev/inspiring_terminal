@@ -1,5 +1,7 @@
-from googletrans import Translator
 import asyncio
+
+from googletrans import Translator
+
 from inspire_term.exceptions import TranslationError
 
 
@@ -12,7 +14,6 @@ class TranslatorService:
                 return result.text
         except Exception as exc:
             raise TranslationError("Unable to translate quote.") from exc
-
 
     def translate(self, text: str):
         return asyncio.run(self._translate_text(text))

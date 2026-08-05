@@ -22,9 +22,9 @@ class ConsoleRenderer:
     def error(self, text: str) -> None:
         self.console.print(
             Panel(
-                f"{text}",
-                title="💡 Inspiring Terminal",
-                border_style="green",
+                f"[bold red]{text}[/]",
+                title="❌ Inspiring Terminal",
+                border_style="red",
                 box=box.ROUNDED,
                 padding=(1, 2),
             ),
