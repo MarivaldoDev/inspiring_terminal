@@ -3,14 +3,14 @@ from random import choice, randint
 import requests
 
 
-class Config:
+class QuoteService:
     keywords = ["inspiration", "success", "dreams"]
+    url_base = "https://zenquotes.io/api/quotes/"
 
-    def sentence_day(self) -> tuple[str, str]:
+    def get_quote(self) -> tuple[str, str]:
         keyword = choice(self.keywords)
-        URL_BASE = f"https://zenquotes.io/api/quotes/&keyword={choice(keyword)}"
 
-        response = requests.get(URL_BASE)
+        response = requests.get(self.url_base + f"&keyword={choice(keyword)}")
         data = response.json()
         idx = randint(0, len(data) - 1)
 
