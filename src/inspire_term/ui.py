@@ -18,3 +18,15 @@ class ConsoleRenderer:
             ),
             justify="center",
         )
+
+    def error(self, text: str) -> None:
+        self.console.print(
+            Panel(
+                f"{text}",
+                title="💡 Inspiring Terminal",
+                border_style="green",
+                box=box.ROUNDED,
+                padding=(1, 2),
+            ),
+            justify="center",
+        )
