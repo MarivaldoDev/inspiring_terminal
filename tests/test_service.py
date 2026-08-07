@@ -25,12 +25,14 @@ def test_get_quote_returns_quote(mocker):
 
     service = QuoteService()
 
-    quote = service.get_quote()
+    quote = service.get_quotes()
 
-    assert quote == Quote(
-        text="Success is not final.",
-        author="Winston Churchill",
-    )
+    assert quote == [
+        Quote(
+            text="Success is not final.",
+            author="Winston Churchill",
+        )
+    ]
 
 
 def test_get_quote_raises_quote_fetch_error_when_request_fails(mocker):
@@ -41,5 +43,5 @@ def test_get_quote_raises_quote_fetch_error_when_request_fails(mocker):
 
     service = QuoteService()
 
-    with pytest.raises(QuoteFetchError, match="Unable to fetch today's quote."):
-        service.get_quote()
+    with pytest.raises(QuoteFetchError, match="Unable to fetch quotes."):
+        service.get_quotes()

@@ -3,7 +3,7 @@ from dataclasses import asdict
 from datetime import date
 from pathlib import Path
 
-from inspire_term.models import Quote
+from inspire_term.models import Quote, QuoteCacheData
 
 
 class QuoteCache:
@@ -14,11 +14,11 @@ class QuoteCache:
     def ensure_cache_dir(self) -> None:
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-    def save(self, quote: Quote) -> None:
+    def save(self, cache_data: QuoteCacheData) -> None:
         self.ensure_cache_dir()
 
-        data = asdict(quote)
-        data["date"] = date.today().isoformat()
+        data = asdict(cache_data)
+        data["date"] = cache_data.date.isoformat()
 
         with self.cache_file.open("w", encoding="utf-8") as file:
             json.dump(
@@ -28,7 +28,7 @@ class QuoteCache:
                 indent=4,
             )
 
-    def load(self) -> Quote | None:
+    def load(self) -> QuoteCacheData | None:
         if not self.cache_file.exists():
             return None
 
@@ -36,12 +36,17 @@ class QuoteCache:
             with self.cache_file.open("r", encoding="utf-8") as file:
                 data = json.load(file)
 
-            cached_date = data.pop("date")
+            cached_date = date.fromisoformat(data["date"])
 
-            if cached_date != date.today().isoformat():
+            if cached_date != date.today():
                 return None
 
-            return Quote(**data)
+            quotes = [Quote(**quote) for quote in data["quotes"]]
+
+            return QuoteCacheData(
+                date=cached_date,
+                quotes=quotes,
+            )
 
         except (json.JSONDecodeError, KeyError, TypeError):
             return None

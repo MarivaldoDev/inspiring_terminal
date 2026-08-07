@@ -1,5 +1,3 @@
-from random import choice, randint
-
 import requests
 
 from inspire_term.exceptions import QuoteFetchError
@@ -7,19 +5,15 @@ from inspire_term.models import Quote
 
 
 class QuoteService:
-    keywords = ["inspiration", "success", "dreams"]
-    url_base = "https://zenquotes.io/api/quotes/"
+    url = "https://zenquotes.io/api/quotes/"
 
-    def get_quote(self) -> Quote:
+    def get_quotes(self) -> list[Quote]:
         try:
-            keyword = choice(self.keywords)
-
-            response = requests.get(self.url_base + f"&keyword={keyword}")
+            response = requests.get(self.url)
             response.raise_for_status()
 
             data = response.json()
-            idx = randint(0, len(data) - 1)
 
-            return Quote(text=data[idx]["q"], author=data[idx]["a"])
+            return [Quote(text=item["q"], author=item["a"]) for item in data]
         except requests.RequestException as exc:
-            raise QuoteFetchError("Unable to fetch today's quote.") from exc
+            raise QuoteFetchError("Unable to fetch quotes.") from exc
