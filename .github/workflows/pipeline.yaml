@@ -1,0 +1,30 @@
+name: Pipeline
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copiando repositório
+        uses: actions/checkout@v4
+
+      - name: Instalando UV
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Instalando Python
+        run: uv python install 3.13
+
+      - name: Instalando dependências
+        run: uv sync --locked
+
+      - name: Rodando testes
+        run: uv run pytest
+
+      - name: Rodando lint
+        run: uv run ruff check .
+
+      - name: Build
+        run: uv build
