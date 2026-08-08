@@ -30,8 +30,6 @@ def main() -> None:
             quotes=quotes,
         )
 
-        cache.save(cache_data)
-
     try:
         quote = choice(cache_data.quotes)
         selected_index = cache_data.quotes.index(quote)
