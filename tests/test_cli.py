@@ -23,10 +23,10 @@ def patched_services(mocker, sample_quotes):
     translator = mocker.Mock()
     renderer = mocker.Mock()
 
-    mocker.patch("inspire_term.cli.QuoteCache", return_value=cache)
-    mocker.patch("inspire_term.cli.QuoteService", return_value=quote_service)
-    mocker.patch("inspire_term.cli.TranslatorService", return_value=translator)
-    mocker.patch("inspire_term.cli.ConsoleRenderer", return_value=renderer)
+    mocker.patch("inspire_term.flow.QuoteCache", return_value=cache)
+    mocker.patch("inspire_term.flow.QuoteService", return_value=quote_service)
+    mocker.patch("inspire_term.flow.TranslatorService", return_value=translator)
+    mocker.patch("inspire_term.flow.ConsoleRenderer", return_value=renderer)
 
     return cache, quote_service, translator, renderer
 
@@ -36,7 +36,7 @@ def test_shows_translated_cached_quote(mocker, patched_services, sample_quotes):
     cache_data = QuoteCacheData(date=date.today(), quotes=sample_quotes.copy())
     cache.load.return_value = cache_data
 
-    mocker.patch("inspire_term.cli.choice", return_value=cache_data.quotes[0])
+    mocker.patch("inspire_term.flow.choice", return_value=cache_data.quotes[0])
     translator.translate.return_value = "O sucesso não é definitivo."
 
     main()
@@ -56,7 +56,7 @@ def test_fetches_and_saves_when_cache_missing(mocker, patched_services, sample_q
     quote_service.get_quotes.return_value = sample_quotes.copy()
 
     mocker.patch(
-        "inspire_term.cli.choice", return_value=quote_service.get_quotes.return_value[0]
+        "inspire_term.flow.choice", return_value=quote_service.get_quotes.return_value[0]
     )
     translator.translate.return_value = "O sucesso não é definitivo."
 
@@ -107,7 +107,7 @@ def test_handles_translation_error(mocker, patched_services, sample_quotes):
     cache_data = QuoteCacheData(date=date.today(), quotes=sample_quotes.copy())
     cache.load.return_value = cache_data
 
-    mocker.patch("inspire_term.cli.choice", return_value=cache_data.quotes[0])
+    mocker.patch("inspire_term.flow.choice", return_value=cache_data.quotes[0])
     translator.translate.side_effect = TranslationError("boom")
 
     main()
@@ -134,7 +134,7 @@ def test_run_without_translation(
     cache.load.return_value = cache_data
 
     mocker.patch(
-        "inspire_term.cli.choice",
+        "inspire_term.flow.choice",
         return_value=cache_data.quotes[0],
     )
 
