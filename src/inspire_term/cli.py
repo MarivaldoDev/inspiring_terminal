@@ -36,7 +36,9 @@ def main() -> None:
         quote = choice(cache_data.quotes)
         selected_index = cache_data.quotes.index(quote)
     except IndexError:
-        renderer.error("Todas as frases do dia foram usadas. Aguardamos você no dia de amanhã!")
+        renderer.error(
+            "Todas as frases do dia foram usadas. Aguardamos você no dia de amanhã!"
+        )
         return
 
     try:
