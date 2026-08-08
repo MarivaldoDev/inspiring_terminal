@@ -4,6 +4,7 @@ import pytest
 
 from inspire_term.cli import main
 from inspire_term.exceptions import QuoteFetchError, TranslationError
+from inspire_term.flow import run
 from inspire_term.models import Quote, QuoteCacheData
 
 
@@ -117,3 +118,33 @@ def test_handles_translation_error(mocker, patched_services, sample_quotes):
     cache.save.assert_called_once()
     saved = cache.save.call_args[0][0]
     assert saved.quotes == [sample_quotes[1]]
+
+
+def test_run_without_translation(
+    mocker,
+    patched_services,
+    sample_quotes,
+):
+    cache, quote_service, translator, renderer = patched_services
+
+    cache_data = QuoteCacheData(
+        date=date.today(),
+        quotes=sample_quotes.copy(),
+    )
+    cache.load.return_value = cache_data
+
+    mocker.patch(
+        "inspire_term.cli.choice",
+        return_value=cache_data.quotes[0],
+    )
+
+    run(no_translate=True)
+
+    translator.translate.assert_not_called()
+
+    renderer.show.assert_called_once_with(
+        "Success is not final.",
+        "Winston Churchill",
+    )
+
+    cache.save.assert_called_once_with(cache_data)

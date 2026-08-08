@@ -13,10 +13,11 @@ dependencies = [
     "googletrans>=4.0.2",
     "requests>=2.34.2",
     "rich>=15.0.0",
+    "typer>=0.27.1",
 ]
 
 [project.scripts]
-inspire = "inspire_term.cli:main"
+inspire = "inspire_term.cli:app"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
