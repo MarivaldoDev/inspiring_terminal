@@ -1,7 +1,8 @@
 from unittest.mock import Mock
 
-from inspire_term.ui import ConsoleRenderer
 from rich.panel import Panel
+
+from inspire_term.ui import ConsoleRenderer
 
 
 def test_show_prints_panel_with_text_and_author():
