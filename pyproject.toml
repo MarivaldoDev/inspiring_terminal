@@ -5,9 +5,28 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "inspiring-terminal"
 version = "0.1.0"
-description = "Uma ferramenta de terminal que exibe uma frase inspiradora do dia."
+authors = [
+    { name="Marivaldo Pedro", email="marivaldo.pedro.dev@outlook.com" },
+]
+description = "Uma CLI que exibe citações inspiradoras no seu terminal."
 readme = "README.md"
 requires-python = ">=3.13"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Natural Language :: Portuguese (Brazilian)",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+]
+
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/MarivaldoDev/inspiring_terminal"
+Issues = "https://github.com/MarivaldoDev/inspiring_terminal/issues"
+
 
 dependencies = [
     "googletrans>=4.0.2",
