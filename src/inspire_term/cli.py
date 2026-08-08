@@ -33,14 +33,19 @@ def main() -> None:
         cache.save(cache_data)
 
     quote = choice(cache_data.quotes)
+    selected_index = cache_data.quotes.index(quote)
 
     try:
         translated = translator.translate(quote.text)
         quote = replace(quote, translated=translated)
     except TranslationError:
+        renderer.error("Tradução falhou! Exibindo frase em Inglês.")
         quote = replace(quote, translated=quote.text)
 
     renderer.show(quote.translated or quote.text, quote.author)
+
+    cache_data.quotes.pop(selected_index)
+    cache.save(cache_data)
 
 
 if __name__ == "__main__":
