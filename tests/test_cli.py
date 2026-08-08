@@ -61,8 +61,6 @@ def test_fetches_and_saves_when_cache_missing(mocker, patched_services, sample_q
 
     main()
 
-    # em test_fetches_and_saves_when_cache_missing, após main()
-
     cache.save.assert_called_once()
     saved = cache.save.call_args[0][0]
     assert saved.date == date.today()
