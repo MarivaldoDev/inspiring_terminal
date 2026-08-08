@@ -56,7 +56,8 @@ def test_fetches_and_saves_when_cache_missing(mocker, patched_services, sample_q
     quote_service.get_quotes.return_value = sample_quotes.copy()
 
     mocker.patch(
-        "inspire_term.flow.choice", return_value=quote_service.get_quotes.return_value[0]
+        "inspire_term.flow.choice",
+        return_value=quote_service.get_quotes.return_value[0],
     )
     translator.translate.return_value = "O sucesso não é definitivo."
 
