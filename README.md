@@ -16,7 +16,7 @@ pip install inspiring-terminal
 
 Após a instalação, o comando `inspire` estará disponível no terminal.
 
-## 🚀 Uso
+## Como usar?
 
 Para exibir uma frase:
 
@@ -104,7 +104,4 @@ uv run ruff check .
 Este projeto está disponível sob a licença definida no arquivo `LICENSE`.
 
 ## 🔗 Links
-
-- **PyPI:** <PYPI_URL>
-- **GitHub:** <GITHUB_URL>
 - **ZenQuotes API:** https://docs.zenquotes.io/zenquotes-documentation/
