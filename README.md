@@ -1,7 +1,10 @@
+<img width="300" height="230" alt="Image" src="https://github.com/user-attachments/assets/8d1fe9b1-d6f3-4091-bf27-07d304c62165" />
+
 # Inspiring Terminal
 
+[![PyPI version](https://img.shields.io/pypi/v/inspiring-terminal.svg)](https://pypi.org/project/inspiring-terminal/)
 [![CI](https://github.com/MarivaldoDev/inspiring_terminal/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/MarivaldoDev/inspiring_terminal/actions/workflows/pipeline.yaml)
-[![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 Inspiring terminal é um CLI que exibe frases inspiradoras de uma forma bonita no seu terminal.
@@ -14,13 +17,7 @@ As frases são obtidas através da [ZenQuotes API](https://docs.zenquotes.io/zen
 pip install inspiring-terminal
 ```
 
-## Usando pipx:
-
-```bash
-pipx install inspiring-terminal
-```
-
-## Usando UV:
+## Caso você utilize UV:
 
 ```bash
 uv too install inspiring-terminal
