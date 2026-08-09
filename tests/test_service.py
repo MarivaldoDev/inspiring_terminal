@@ -43,5 +43,8 @@ def test_get_quote_raises_quote_fetch_error_when_request_fails(mocker):
 
     service = QuoteService()
 
-    with pytest.raises(QuoteFetchError, match="Unable to fetch quotes."):
+    with pytest.raises(
+        QuoteFetchError,
+        match="Não foi possível obter as citações. Verifique sua conexão.",
+    ):
         service.get_quotes()

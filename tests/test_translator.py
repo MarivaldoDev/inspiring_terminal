@@ -40,6 +40,6 @@ def test_translate_raises_translation_error(mocker):
 
     with pytest.raises(
         TranslationError,
-        match="Unable to translate quote.",
+        match="Não foi possível traduzir a citação.",
     ):
         service.translate("Success is not final.")

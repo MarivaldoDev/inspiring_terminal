@@ -2,7 +2,6 @@ from datetime import date
 
 import pytest
 
-from inspire_term.cli import main
 from inspire_term.exceptions import QuoteFetchError, TranslationError
 from inspire_term.flow import run
 from inspire_term.models import Quote, QuoteCacheData
@@ -39,7 +38,7 @@ def test_shows_translated_cached_quote(mocker, patched_services, sample_quotes):
     mocker.patch("inspire_term.flow.choice", return_value=cache_data.quotes[0])
     translator.translate.return_value = "O sucesso não é definitivo."
 
-    main()
+    run()
 
     assert cache_data.quotes == [sample_quotes[1]]
     cache.save.assert_called_once_with(cache_data)
@@ -61,7 +60,7 @@ def test_fetches_and_saves_when_cache_missing(mocker, patched_services, sample_q
     )
     translator.translate.return_value = "O sucesso não é definitivo."
 
-    main()
+    run()
 
     cache.save.assert_called_once()
     saved = cache.save.call_args[0][0]
@@ -81,7 +80,7 @@ def test_handles_quote_fetch_error(mocker, patched_services):
         "Unable to fetch today's quote."
     )
 
-    main()
+    run()
 
     quote_service.get_quotes.assert_called_once_with()
     renderer.error.assert_called_once_with("Unable to fetch today's quote.")
@@ -93,7 +92,7 @@ def test_handles_index_error(mocker, patched_services):
     cache, quote_service, translator, renderer = patched_services
     cache.load.return_value = QuoteCacheData(date=date.today(), quotes=[])
 
-    main()
+    run()
 
     renderer.error.assert_called_once_with(
         "Todas as frases do dia foram usadas. Aguardamos você no dia de amanhã!"
@@ -111,7 +110,7 @@ def test_handles_translation_error(mocker, patched_services, sample_quotes):
     mocker.patch("inspire_term.flow.choice", return_value=cache_data.quotes[0])
     translator.translate.side_effect = TranslationError("boom")
 
-    main()
+    run()
 
     renderer.error.assert_called_once_with("Tradução falhou! Exibindo frase em Inglês.")
     renderer.show.assert_called_once_with("Success is not final.", "Winston Churchill")
