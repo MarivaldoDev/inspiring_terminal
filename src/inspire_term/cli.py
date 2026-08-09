@@ -25,7 +25,7 @@ def main(
         False,
         "--no-translate",
         help="Não traduz a frase para o português.",
-    )
+    ),
 ) -> None:
     run(no_translate=no_translate)
 
