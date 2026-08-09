@@ -1,4 +1,3 @@
-<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/9a82be69-4444-406a-a15e-d010ac740622" />
 # Inspiring Terminal
 
 [![CI](https://github.com/MarivaldoDev/inspiring_terminal/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/MarivaldoDev/inspiring_terminal/actions/workflows/pipeline.yaml)
@@ -28,13 +27,13 @@ inspire
 Exemplo:
 
 ```text
-                ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
-                │                                                                                        │                        
-                │  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
-                │                                                                                        │                        
-                │                                     — Paulo Coelho                                     │                        
-                │                                                                                        │                        
-                ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
+            ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
+            │                                                                                        │                        
+            │  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
+            │                                                                                        │                        
+            │                                     — Paulo Coelho                                     │                        
+            │                                                                                        │                        
+            ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
 ```
 
 ### Exibir a frase original
