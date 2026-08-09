@@ -1,6 +1,11 @@
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/9a82be69-4444-406a-a15e-d010ac740622" />
 # Inspiring Terminal
 
-Uma CLI para exibir frases inspiradoras diretamente no terminal.
+[![CI](https://github.com/MarivaldoDev/inspiring_terminal/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/MarivaldoDev/inspiring_terminal/actions/workflows/pipeline.yaml)
+[![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+
+Inspiring terminal é um CLI que exibe frases inspiradoras de uma forma bonita no seu terminal.
 
 As frases são obtidas através da [ZenQuotes API](https://docs.zenquotes.io/zenquotes-documentation/), armazenadas em cache e traduzidas automaticamente para português.
 
@@ -23,13 +28,13 @@ inspire
 Exemplo:
 
 ```text
-                        ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
-                        │                                                                                        │                        
-                        │  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
-                        │                                                                                        │                        
-                        │                                     — Paulo Coelho                                     │                        
-                        │                                                                                        │                        
-                        ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
+                ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
+                │                                                                                        │                        
+                │  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
+                │                                                                                        │                        
+                │                                     — Paulo Coelho                                     │                        
+                │                                                                                        │                        
+                ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
 ```
 
 ### Exibir a frase original
