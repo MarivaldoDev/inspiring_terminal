@@ -27,13 +27,13 @@ inspire
 Exemplo:
 
 ```text
-            ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
-            │                                                                                        │                        
-            │  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
-            │                                                                                        │                        
-            │                                     — Paulo Coelho                                     │                        
-            │                                                                                        │                        
-            ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
+    ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
+    │                                                                                        │                        
+    │  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
+    │                                                                                        │                        
+    │                                     — Paulo Coelho                                     │                        
+    │                                                                                        │                        
+    ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
 ```
 
 ### Exibir a frase original

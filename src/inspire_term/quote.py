@@ -16,4 +16,4 @@ class QuoteService:
 
             return [Quote(text=item["q"], author=item["a"]) for item in data]
         except requests.RequestException as exc:
-            raise QuoteFetchError("Unable to fetch quotes.") from exc
+            raise QuoteFetchError("Não foi possível obter as citações. Verifique sua conexão.") from exc

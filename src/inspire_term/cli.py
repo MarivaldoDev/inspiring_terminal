@@ -4,7 +4,10 @@ import typer
 
 from inspire_term.flow import run, version_callback
 
-app = typer.Typer()
+app = typer.Typer(
+    help="Exibe frases inspiradoras no terminal.",
+    add_completion=False,
+)
 
 
 @app.command()
@@ -15,10 +18,14 @@ def main(
             "--version",
             callback=version_callback,
             is_eager=True,
-            help="Show the application version.",
+            help="Exibe a versão da aplicação.",
         ),
     ] = False,
-    no_translate: bool = False,
+    no_translate: bool = typer.Option(
+        False,
+        "--no-translate",
+        help="Não traduz a frase para o português.",
+    )
 ) -> None:
     run(no_translate=no_translate)
 

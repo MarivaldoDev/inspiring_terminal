@@ -16,7 +16,7 @@ class TranslatorService:
 
                 return result.text
         except Exception as exc:
-            raise TranslationError("Unable to translate quote.") from exc
+            raise TranslationError("Não foi possível traduzir a citação.") from exc
 
     def translate(self, text: str):
         return asyncio.run(self._translate_text(text))
