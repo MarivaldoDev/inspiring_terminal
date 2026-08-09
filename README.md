@@ -14,6 +14,18 @@ As frases são obtidas através da [ZenQuotes API](https://docs.zenquotes.io/zen
 pip install inspiring-terminal
 ```
 
+## Usando pipx:
+
+```bash
+pipx install inspiring-terminal
+```
+
+## Usando UV:
+
+```bash
+uv too install inspiring-terminal
+```
+
 Após a instalação, o comando `inspire` estará disponível no terminal.
 
 ## Como usar?
@@ -27,13 +39,13 @@ inspire
 Exemplo:
 
 ```text
-    ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
-    │                                                                                        │                        
-    │  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
-    │                                                                                        │                        
-    │                                     — Paulo Coelho                                     │                        
-    │                                                                                        │                        
-    ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
+╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
+│                                                                                        │                        
+│  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
+│                                                                                        │                        
+│                                     — Paulo Coelho                                     │                        
+│                                                                                        │                        
+╰────────────────────────────────────────────────────────────────────────────────────────╯                        
 ```
 
 ### Exibir a frase original
@@ -71,7 +83,7 @@ As frases são utilizadas individualmente ao longo do dia até que o conjunto se
 Clone o repositório:
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone https://github.com/MarivaldoDev/inspiring_terminal
 cd inspiring-terminal
 ```
 
@@ -105,3 +117,32 @@ Este projeto está disponível sob a licença definida no arquivo `LICENSE`.
 
 ## 🔗 Links
 - **ZenQuotes API:** https://docs.zenquotes.io/zenquotes-documentation/
+
+## 🤝 Contribuições
+
+O **Inspiring Terminal** é um projeto aberto e contribuições são bem-vindas.
+
+Se você tiver uma ideia de melhoria, encontrar um problema ou quiser contribuir com código, fique à vontade para abrir uma *issue* ou enviar um *pull request* no repositório.
+
+### 💡 Possíveis melhorias
+
+Algumas ideias para versões futuras:
+
+- 🎨 Novas opções de personalização da interface do terminal;
+- 🌍 Suporte a outros idiomas;
+- 💾 Melhorias no sistema de cache;
+- 🧪 Ampliação da cobertura de testes;
+- 🔌 Suporte a outras APIs de frases;
+- ⚙️ Novas opções e comandos para a CLI;
+- 📝 Melhorias na documentação;
+- 🐛 Correção de bugs e melhorias de desempenho.
+
+### Como contribuir
+
+1. Faça um *fork* do projeto;
+2. Crie uma branch para sua alteração;
+3. Implemente e teste a melhoria;
+4. Faça um *commit* descrevendo a alteração;
+5. Envie um *pull request*.
+
+Toda contribuição é bem-vinda, seja uma nova funcionalidade, correção de bugs, melhoria na documentação ou simplesmente uma sugestão.
