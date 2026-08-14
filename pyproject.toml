@@ -23,7 +23,7 @@ license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
 dependencies = [
-    "googletrans>=4.0.2",
+    "deep-translator>=1.11.4",
     "requests>=2.34.2",
     "rich>=15.0.0",
     "typer>=0.27.1",

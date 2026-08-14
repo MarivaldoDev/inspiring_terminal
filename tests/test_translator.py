@@ -1,20 +1,16 @@
 import pytest
+from deep_translator.exceptions import RequestError
 
 from inspire_term.exceptions import TranslationError
 from inspire_term.translator import TranslatorService
 
 
 def test_translate_returns_translated_text(mocker):
-    fake_result = mocker.Mock()
-    fake_result.text = "O sucesso não é definitivo."
-
-    fake_translator = mocker.AsyncMock()
-    fake_translator.translate.return_value = fake_result
-
-    fake_translator.__aenter__.return_value = fake_translator
+    fake_translator = mocker.Mock()
+    fake_translator.translate.return_value = "O sucesso não é definitivo."
 
     mocker.patch(
-        "inspire_term.translator.Translator",
+        "inspire_term.translator.GoogleTranslator",
         return_value=fake_translator,
     )
 
@@ -26,13 +22,11 @@ def test_translate_returns_translated_text(mocker):
 
 
 def test_translate_raises_translation_error(mocker):
-    fake_translator = mocker.AsyncMock()
-
-    fake_translator.translate.side_effect = Exception("Google Translate error")
-    fake_translator.__aenter__.return_value = fake_translator
+    fake_translator = mocker.Mock()
+    fake_translator.translate.side_effect = RequestError()
 
     mocker.patch(
-        "inspire_term.translator.Translator",
+        "inspire_term.translator.GoogleTranslator",
         return_value=fake_translator,
     )
 
