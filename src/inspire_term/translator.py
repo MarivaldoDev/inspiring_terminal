@@ -1,22 +1,19 @@
-import asyncio
-
-from googletrans import Translator
+from deep_translator import GoogleTranslator
+from deep_translator.exceptions import (
+    RequestError,
+    TooManyRequests,
+    TranslationNotFound,
+)
 
 from inspire_term.exceptions import TranslationError
 
 
 class TranslatorService:
     def __init__(self) -> None:
-        self.translator = Translator()
+        self.translator = GoogleTranslator(source="auto", target="pt")
 
-    async def _translate_text(self, text: str) -> str:
+    def translate(self, text: str) -> str:
         try:
-            async with self.translator as translator:
-                result = await translator.translate(text, dest="pt")
-
-                return result.text
-        except Exception as exc:
+            return self.translator.translate(text)
+        except (RequestError, TooManyRequests, TranslationNotFound) as exc:
             raise TranslationError("Não foi possível traduzir a citação.") from exc
-
-    def translate(self, text: str):
-        return asyncio.run(self._translate_text(text))
