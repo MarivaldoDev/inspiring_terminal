@@ -55,6 +55,33 @@ Para exibir a frase no idioma original:
 inspire --no-translate
 ```
 
+## Estilos de exibição
+
+O Inspiring Terminal permite escolher como a frase será exibida no terminal.
+
+### Estilo padrão
+
+```bash
+inspire
+```
+Exibe a frase utilizando o estilo padrão da aplicação.
+
+### Estilo simples
+
+```bash
+inspire --style simple
+```
+Exibe a frase de forma mais simples, sem o quadro utilizado no estilo padrão.
+
+Você também pode combinar o estilo com outras opções:
+
+```bash
+inspire --style simple --no-translate
+```
+
+A tradução das frases depende de um serviço externo e pode eventualmente falhar ou produzir uma tradução que não seja totalmente clara.
+
+
 ### Ver a versão
 
 ```bash
