@@ -35,6 +35,23 @@ def test_get_quote_returns_quote(mocker):
     ]
 
 
+def test_get_quote_sends_browser_user_agent(mocker):
+    fake_response = mocker.Mock()
+    fake_response.json.return_value = []
+    fake_response.raise_for_status.return_value = None
+
+    fake_get = mocker.patch(
+        "inspire_term.quote.requests.get",
+        return_value=fake_response,
+    )
+
+    service = QuoteService()
+    service.get_quotes()
+
+    _, kwargs = fake_get.call_args
+    assert "python-requests" not in kwargs["headers"]["User-Agent"]
+
+
 def test_get_quote_raises_quote_fetch_error_when_request_fails(mocker):
     mocker.patch(
         "inspire_term.quote.requests.get",
