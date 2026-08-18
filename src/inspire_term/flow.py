@@ -15,8 +15,8 @@ from inspire_term.ui import ConsoleRenderer
 APP_VERSION = version("inspiring-terminal")
 
 
-def run(no_translate: bool = False) -> None:
-    renderer = ConsoleRenderer()
+def run(no_translate: bool = False, style: str = "default") -> None:
+    renderer = ConsoleRenderer(style=style)
     quote_service = QuoteService()
     translator = TranslatorService()
     cache = QuoteCache()

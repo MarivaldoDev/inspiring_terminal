@@ -2,6 +2,7 @@ from datetime import date
 
 import pytest
 
+from inspire_term.cli import main
 from inspire_term.exceptions import QuoteFetchError, TranslationError
 from inspire_term.flow import run
 from inspire_term.models import Quote, QuoteCacheData
@@ -25,32 +26,44 @@ def patched_services(mocker, sample_quotes):
     mocker.patch("inspire_term.flow.QuoteCache", return_value=cache)
     mocker.patch("inspire_term.flow.QuoteService", return_value=quote_service)
     mocker.patch("inspire_term.flow.TranslatorService", return_value=translator)
-    mocker.patch("inspire_term.flow.ConsoleRenderer", return_value=renderer)
+    renderer_class = mocker.patch(
+        "inspire_term.flow.ConsoleRenderer", return_value=renderer
+    )
 
-    return cache, quote_service, translator, renderer
+    return cache, quote_service, translator, renderer, renderer_class
 
 
 def test_shows_translated_cached_quote(mocker, patched_services, sample_quotes):
-    cache, quote_service, translator, renderer = patched_services
-    cache_data = QuoteCacheData(date=date.today(), quotes=sample_quotes.copy())
+    cache, quote_service, translator, renderer, renderer_class = patched_services
+
+    cache_data = QuoteCacheData(
+        date=date.today(),
+        quotes=sample_quotes.copy(),
+    )
     cache.load.return_value = cache_data
 
-    mocker.patch("inspire_term.flow.choice", return_value=cache_data.quotes[0])
+    mocker.patch(
+        "inspire_term.flow.choice",
+        return_value=cache_data.quotes[0],
+    )
     translator.translate.return_value = "O sucesso não é definitivo."
 
-    run()
+    run(style="simple")
+
+    renderer_class.assert_called_once_with(style="simple")
 
     assert cache_data.quotes == [sample_quotes[1]]
     cache.save.assert_called_once_with(cache_data)
     quote_service.get_quotes.assert_not_called()
     translator.translate.assert_called_once_with("Success is not final.")
     renderer.show.assert_called_once_with(
-        "O sucesso não é definitivo.", "Winston Churchill"
+        "O sucesso não é definitivo.",
+        "Winston Churchill",
     )
 
 
 def test_fetches_and_saves_when_cache_missing(mocker, patched_services, sample_quotes):
-    cache, quote_service, translator, renderer = patched_services
+    cache, quote_service, translator, renderer, _ = patched_services
     cache.load.return_value = None
     quote_service.get_quotes.return_value = sample_quotes.copy()
 
@@ -74,7 +87,7 @@ def test_fetches_and_saves_when_cache_missing(mocker, patched_services, sample_q
 
 
 def test_handles_quote_fetch_error(mocker, patched_services):
-    cache, quote_service, translator, renderer = patched_services
+    cache, quote_service, translator, renderer, _ = patched_services
     cache.load.return_value = None
     quote_service.get_quotes.side_effect = QuoteFetchError(
         "Unable to fetch today's quote."
@@ -89,7 +102,7 @@ def test_handles_quote_fetch_error(mocker, patched_services):
 
 
 def test_handles_index_error(mocker, patched_services):
-    cache, quote_service, translator, renderer = patched_services
+    cache, quote_service, translator, renderer, _ = patched_services
     cache.load.return_value = QuoteCacheData(date=date.today(), quotes=[])
 
     run()
@@ -103,7 +116,7 @@ def test_handles_index_error(mocker, patched_services):
 
 
 def test_handles_translation_error(mocker, patched_services, sample_quotes):
-    cache, quote_service, translator, renderer = patched_services
+    cache, quote_service, translator, renderer, _ = patched_services
     cache_data = QuoteCacheData(date=date.today(), quotes=sample_quotes.copy())
     cache.load.return_value = cache_data
 
@@ -125,7 +138,7 @@ def test_run_without_translation(
     patched_services,
     sample_quotes,
 ):
-    cache, quote_service, translator, renderer = patched_services
+    cache, quote_service, translator, renderer, _ = patched_services
 
     cache_data = QuoteCacheData(
         date=date.today(),
@@ -148,3 +161,14 @@ def test_run_without_translation(
     )
 
     cache.save.assert_called_once_with(cache_data)
+
+
+def test_main_accepts_simple_style(mocker):
+    run = mocker.patch("inspire_term.cli.run")
+
+    main(no_translate=False, style="simple")
+
+    run.assert_called_once_with(
+        no_translate=False,
+        style="simple",
+    )
