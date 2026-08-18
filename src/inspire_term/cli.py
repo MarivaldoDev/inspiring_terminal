@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Literal
 
 import typer
 
@@ -26,8 +26,13 @@ def main(
         "--no-translate",
         help="Não traduz a frase para o português.",
     ),
+    style: Literal["default", "simple"] = typer.Option(
+        "default",
+        "--style",
+        help="Escolhe o estilo de exibição da frase.",
+    ),
 ) -> None:
-    run(no_translate=no_translate)
+    run(no_translate=no_translate, style=style)
 
 
 if __name__ == "__main__":

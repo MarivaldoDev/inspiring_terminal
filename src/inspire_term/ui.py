@@ -4,10 +4,15 @@ from rich.panel import Panel
 
 
 class ConsoleRenderer:
-    def __init__(self):
+    def __init__(self, style: str = "default"):
         self.console = Console()
+        self.style = style
 
     def show(self, text: str, author: str) -> None:
+        if self.style == "simple":
+            self.console.print(f"[bold bright_yellow]{text}[/]")
+            self.console.print(f"[italic cyan]— {author}[/]")
+            return
         self.console.print(
             Panel(
                 f"[bold white]{text}[/]\n\n" f"[italic cyan]— {author}[/]",
