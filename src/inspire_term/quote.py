@@ -6,10 +6,17 @@ from inspire_term.models import Quote
 
 class QuoteService:
     url = "https://zenquotes.io/api/quotes/"
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        )
+    }
 
     def get_quotes(self) -> list[Quote]:
         try:
-            response = requests.get(self.url)
+            response = requests.get(self.url, headers=self.headers)
             response.raise_for_status()
 
             data = response.json()
