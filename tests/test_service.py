@@ -56,3 +56,18 @@ def test_get_quote_raises_quote_fetch_error_when_request_fails(mocker):
         match="Não foi possível obter as citações. Verifique sua conexão.",
     ):
         service.get_quotes()
+
+
+def test_get_quote_raises_quote_fetch_error_when_something_fails(mocker):
+    mocker.patch(
+        "inspire_term.quote.Session.get",
+        side_effect=KeyError,
+    )
+
+    service = QuoteService()
+
+    with pytest.raises(
+        QuoteFetchError,
+        match="Resposta inválida do serviço de citações.",
+    ):
+        service.get_quotes()

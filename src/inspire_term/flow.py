@@ -45,14 +45,27 @@ def run(no_translate: bool = False, style: str = "default") -> None:
         return
 
     if no_translate:
-        translated = quote.text
+        quote = replace(quote, translated=quote.text)
     else:
         try:
-            translated = translator.translate(quote.text)
+            translated = translator.translate_deep(quote.text)
+
+            deep_failed = (
+                not translated
+                or "Server Error" in translated
+                or "Error 500" in translated
+            )
+            if deep_failed:
+                raise TranslationError("Deep translator retornou erro de servidor.")
+
             quote = replace(quote, translated=translated)
         except TranslationError:
-            renderer.error("Tradução falhou! Exibindo frase em Inglês.")
-            quote = replace(quote, translated=quote.text)
+            try:
+                translated = translator.translate_google(quote.text)
+                quote = replace(quote, translated=translated)
+            except TranslationError:
+                renderer.error("Tradução falhou! Exibindo frase em Inglês.")
+                quote = replace(quote, translated=quote.text)
 
     renderer.show(quote.translated or quote.text, quote.author)
 
