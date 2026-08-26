@@ -1,4 +1,4 @@
-<img width="300" height="230" alt="Image" src="https://github.com/user-attachments/assets/31ccc3ca-f062-484b-b9c4-9a967ab0597e" />
+<img width="300" height="230" alt="Image" src="https://github.com/user-attachments/assets/31ccc3ca-f062-484b-b9c4-9a967ab0597e"/>
 
 # Inspiring Terminal
 
