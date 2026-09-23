@@ -71,7 +71,7 @@ def test_welcome_message():
     printed_panel = mock_console.print.call_args[0][0]
 
     assert isinstance(printed_panel, Panel)
-    assert printed_panel.title == "First run"
+    assert printed_panel.title == "Inspiring Terminal"
     assert printed_panel.border_style == "cyan"
 
     content = str(printed_panel.renderable)
