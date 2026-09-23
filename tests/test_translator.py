@@ -36,7 +36,7 @@ def test_translate_returns_translated_text(mocker):
         return_value=fake_translator,
     )
 
-    service = TranslatorService()
+    service = TranslatorService(language="en")
 
     translated = service.translate_deep("Success is not final.")
 
@@ -52,7 +52,7 @@ def test_translate_raises_translation_error(mocker):
         return_value=fake_translator,
     )
 
-    service = TranslatorService()
+    service = TranslatorService(language="pt")
 
     with pytest.raises(
         TranslationError,
@@ -68,7 +68,7 @@ def test_translate_google_returns_translated_text(mocker):
     mocker.patch("inspire_term.translator.GoogleTranslator", return_value=fake_deep)
     mocker.patch("inspire_term.translator.Translator", return_value=fake_google)
 
-    service = TranslatorService()
+    service = TranslatorService(language="pt")
 
     translated = service.translate_google("Success is not final.")
 
@@ -82,7 +82,7 @@ def test_translate_google_raises_translation_error(mocker):
     mocker.patch("inspire_term.translator.GoogleTranslator", return_value=fake_deep)
     mocker.patch("inspire_term.translator.Translator", return_value=fake_google)
 
-    service = TranslatorService()
+    service = TranslatorService(language="en")
 
     with pytest.raises(
         TranslationError,

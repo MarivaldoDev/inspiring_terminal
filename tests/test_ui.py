@@ -1,6 +1,7 @@
 from unittest.mock import Mock
 
 from rich.panel import Panel
+from rich.table import Table
 
 from inspire_term.ui import ConsoleRenderer
 
@@ -44,7 +45,7 @@ def test_show_simple_style_does_not_print_panel():
 
     printed = mock_console.print.call_args[0][0]
 
-    assert not isinstance(printed, Panel)
+    assert not isinstance(printed, Table)
 
 
 def test_show_simple_style_uses_rich_markup():
@@ -58,6 +59,45 @@ def test_show_simple_style_uses_rich_markup():
 
     assert printed[0].args[0] == "[bold bright_yellow]Success is not final.[/]"
     assert printed[1].args[0] == "[italic cyan]— Winston Churchill[/]"
+
+
+def test_welcome_message():
+    renderer = ConsoleRenderer()
+    mock_console = Mock()
+    renderer.console = mock_console
+
+    renderer.welcome()
+
+    printed_panel = mock_console.print.call_args[0][0]
+
+    assert isinstance(printed_panel, Panel)
+    assert printed_panel.title == "First run"
+    assert printed_panel.border_style == "cyan"
+
+    content = str(printed_panel.renderable)
+    assert "Welcome to Inspiring Terminal!" in content
+    assert "The initial setup will be completed now." in content
+    assert "inspire" in content
+
+
+def test_show_config_display_table_options(mocker):
+    renderer = ConsoleRenderer()
+    mock_console = Mock()
+    renderer.console = mock_console
+
+    mocker.patch(
+        "inspire_term.ui.Prompt.ask",
+        return_value="en",
+    )
+
+    result = renderer.show_config()
+
+    printed_panel = mock_console.print.call_args[0][0]
+
+    assert isinstance(printed_panel, Panel)
+    assert isinstance(printed_panel.renderable, Table)
+    assert printed_panel.title == "Translation language"
+    assert result == "en"
 
 
 def test_error_prints_panel_with_message():
