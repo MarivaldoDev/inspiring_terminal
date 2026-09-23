@@ -12,8 +12,9 @@ from inspire_term.exceptions import TranslationError
 
 
 class TranslatorService:
-    def __init__(self) -> None:
-        self.translator_deep = GoogleTranslator(source="auto", target="pt")
+    def __init__(self, language: str) -> None:
+        self.language = language
+        self.translator_deep = GoogleTranslator(source="auto", target=self.language)
         self.translator = Translator()
 
     def translate_deep(self, text: str) -> str:
@@ -25,7 +26,7 @@ class TranslatorService:
     async def _translate_text(self, text: str) -> str:
         try:
             async with self.translator as translator:
-                result = await translator.translate(text, dest="pt")
+                result = await translator.translate(text, dest=self.language)
 
                 return result.text
         except Exception as exc:

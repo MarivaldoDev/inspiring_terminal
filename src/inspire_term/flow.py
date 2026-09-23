@@ -6,6 +6,7 @@ from random import choice
 import typer
 
 from inspire_term.cache import QuoteCache
+from inspire_term.config import load_config
 from inspire_term.exceptions import QuoteFetchError, TranslationError
 from inspire_term.models import QuoteCacheData
 from inspire_term.quote import QuoteService
@@ -16,9 +17,10 @@ APP_VERSION = version("inspiring-terminal")
 
 
 def run(no_translate: bool = False, style: str = "default") -> None:
+    config = load_config()
     renderer = ConsoleRenderer(style=style)
     quote_service = QuoteService()
-    translator = TranslatorService()
+    translator = TranslatorService(language=config["language"])
     cache = QuoteCache()
 
     cache_data = cache.load()
