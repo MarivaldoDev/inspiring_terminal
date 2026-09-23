@@ -24,6 +24,11 @@ def patched_services(mocker, sample_quotes):
     translator = mocker.Mock()
     renderer = mocker.Mock()
 
+    mocker.patch(
+        "inspire_term.flow.load_config",
+        return_value={"language": "en"},
+    )
+
     mocker.patch("inspire_term.flow.QuoteCache", return_value=cache)
     mocker.patch("inspire_term.flow.QuoteService", return_value=quote_service)
     mocker.patch("inspire_term.flow.TranslatorService", return_value=translator)
