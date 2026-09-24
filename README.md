@@ -7,88 +7,88 @@
 [![Python](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-Inspiring terminal é um CLI que exibe frases inspiradoras de uma forma bonita no seu terminal.
+Inspiring Terminal is a CLI that displays inspiring quotes in a beautiful way in your terminal.
 
-As frases são obtidas através da [ZenQuotes API](https://docs.zenquotes.io/zenquotes-documentation/), armazenadas em cache e traduzidas automaticamente para português.
+The sentences are obtained through [ZenQuotes API](https://docs.zenquotes.io/zenquotes-documentation/), cached and automatically translated into Portuguese.
 
-## 📦 Instalação
+## 📦 Installation
 
 ```bash
 pip install inspiring-terminal
 ```
 
-## Caso você utilize UV:
+## If you use UV:
 
 ```bash
 uv too install inspiring-terminal
 ```
 
-Após a instalação, o comando `inspire` estará disponível no terminal.
+After installation, the `inspire` command will be available in the terminal.
 
-## Como usar?
+## How do I use it?
 
-Para exibir uma frase:
+To display a phrase:
 
 ```bash
 inspire
 ```
 
-Exemplo:
+Example:
 
 ```text
 ╭──────────────────────────────── 💡 Inspiring Terminal ─────────────────────────────────╮                        
 │                                                                                        │                        
-│  Quanto menos você responder às pessoas negativas, mais positiva sua vida se tornará.  │                        
+│    The less you respond to negative people, the more positive your life will become.   │                        
 │                                                                                        │                        
 │                                     — Paulo Coelho                                     │                        
 │                                                                                        │                        
 ╰────────────────────────────────────────────────────────────────────────────────────────╯                        
 ```
 
-### Exibir a frase original
+### Show the original phrase
 
-Por padrão, as frases são traduzidas para português.
+By default, phrases are translated into Portuguese.
 
-Para exibir a frase no idioma original:
+To display the phrase in the original language:
 
 ```bash
 inspire --no-translate
 ```
 
-## Estilos de exibição
+## Display styles
 
-O Inspiring Terminal permite escolher como a frase será exibida no terminal.
+Inspiring Terminal allows you to choose how the phrase is displayed in the terminal.
 
-### Estilo padrão
+### Standard style
 
 ```bash
 inspire
 ```
-Exibe a frase utilizando o estilo padrão da aplicação.
+Displays the phrase using the application's default style.
 
-### Estilo simples
+### Simple style
 
 ```bash
 inspire --style simple
 ```
-Exibe a frase de forma mais simples, sem o quadro utilizado no estilo padrão.
+Displays the phrase more simply, without the frame used in the standard style.
 
-Você também pode combinar o estilo com outras opções:
+You can also combine the style with other options:
 
 ```bash
 inspire --style simple --no-translate
 ```
 
-A tradução das frases depende de um serviço externo e pode eventualmente falhar ou produzir uma tradução que não seja totalmente clara.
+The translation of the sentences relies on an external service and may occasionally fail or produce a translation that is not entirely clear.
 
 
-### Ver a versão
+### View version
 
 ```bash
 inspire --version
 ```
 
-### Ver todas as opções
+### View all options
 
 ```bash
 inspire --help
@@ -96,77 +96,77 @@ inspire --help
 
 ## 💾 Cache
 
-O Inspiring Terminal armazena localmente um conjunto de frases para evitar uma requisição à API a cada execução.
+Inspiring Terminal stores a set of quotes locally to avoid making an API request upon every execution.
 
-Um novo conjunto de frases é obtido quando o cache do dia não está disponível.
+A new set of quotes is fetched when the day's cache is unavailable.
 
-As frases são utilizadas individualmente ao longo do dia até que o conjunto seja esgotado.
+The quotes are used individually throughout the day until the set is exhausted.
 
-## 🛠️ Desenvolvimento
+## 🛠️ Development
 
-Clone o repositório:
+Clone the repository:
 
 ```bash
 git clone https://github.com/MarivaldoDev/inspiring_terminal
 cd inspiring-terminal
 ```
 
-Instale as dependências:
+Install the dependencies:
 
 ```bash
 uv sync
 ```
 
-Execute a aplicação:
+Run the application:
 
 ```bash
 uv run inspire
 ```
 
-Execute os testes:
+Run the tests:
 
 ```bash
 uv run pytest
 ```
 
-Verifique o código:
+Check the code:
 
 ```bash
 uv run ruff check .
 ```
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está disponível sob a licença definida no arquivo `LICENSE`.
+This project is available under the license defined in the file `LICENSE`.
 
 ## 🔗 Links
 - **ZenQuotes API:** https://docs.zenquotes.io/zenquotes-documentation/
 
-## 🤝 Contribuições
+## 🤝 Contributions
 
-O **Inspiring Terminal** é um projeto aberto e contribuições são bem-vindas.
+**Inspiring Terminal** is an open project, and contributions are welcome.
 
-Se você tiver uma ideia de melhoria, encontrar um problema ou quiser contribuir com código, fique à vontade para abrir uma *issue* ou enviar um *pull request* no repositório.
+If you have an idea for improvement, find a problem, or want to contribute code, feel free to open a support ticket *issue* or send a *pull request* in the repository.
 
-### 💡 Possíveis melhorias
+### 💡 Possible improvements
 
-Algumas ideias para versões futuras:
+Some ideas for future versions:
 
-- 🎨 Novas opções de personalização da interface do terminal;
-- 🌍 Suporte a outros idiomas;
-- 💾 Melhorias no sistema de cache;
-- 🧪 Ampliação da cobertura de testes;
-- 🔌 Suporte a outras APIs de frases;
-- ⚙️ Novas opções e comandos para a CLI;
-- 📝 Melhorias na documentação;
-- 🐛 Correção de bugs e melhorias de desempenho.
+- 🎨 New terminal interface customization options;
+- 🌍 Support for additional languages;
+- 💾 Cache system improvements;
+- 🧪 Expanded test coverage;
+- 🔌 Support for additional quote APIs;
+- ⚙️ New CLI options and commands;
+- 📝 ​​Documentation improvements;
+- 🐛 Bug fixes and performance improvements.
 
-### Como contribuir
+### How to contribute
 
-1. Faça um *fork* do projeto;
-2. Crie uma branch para sua alteração;
-3. Implemente e teste a melhoria;
-4. Faça um *commit* descrevendo a alteração;
-5. Envie um *pull request*.
+1. *Fork* the project;
+2. Create a *branch* for your change;
+3. Implement and *test* the improvement;
+4. *Commit* the change with a description;
+5. Submit a *pull request*.
 
-Toda contribuição é bem-vinda, seja uma nova funcionalidade, correção de bugs, melhoria na documentação ou simplesmente uma sugestão.
+All contributions are welcome, whether it's a new feature, a bug fix, an improvement to the documentation, or simply a suggestion.
