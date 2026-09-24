@@ -38,3 +38,14 @@ def load_config() -> dict[str, str]:
 
     with open(CONFIG_FILE, "r", encoding="utf-8") as file:
         return json.load(file)
+
+
+def reset_config() -> None:
+    console = ConsoleRenderer()
+
+    if CONFIG_FILE.exists():
+        CONFIG_FILE.unlink()
+    else:
+        console.error(
+            "The configuration cannot be reset if there is no (configuration)."
+        )

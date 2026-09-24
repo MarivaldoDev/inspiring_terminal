@@ -200,7 +200,10 @@ def test_run_without_translation(
 def test_main_accepts_simple_style(mocker):
     run = mocker.patch("inspire_term.cli.run")
 
-    main(no_translate=False, style="simple")
+    ctx = mocker.Mock()
+    ctx.invoked_subcommand = None
+
+    main(no_translate=False, style="simple", ctx=ctx)
 
     run.assert_called_once_with(
         no_translate=False,

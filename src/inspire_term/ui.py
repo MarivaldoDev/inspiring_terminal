@@ -21,7 +21,8 @@ class ConsoleRenderer:
                 border_style="cyan",
                 box=box.ROUNDED,
                 padding=(1, 2),
-            )
+            ),
+            justify="center",
         )
 
     def show(self, text: str, author: str) -> None:
@@ -79,6 +80,31 @@ class ConsoleRenderer:
         )
 
         return selected_language
+
+    def screen_reset(self) -> bool:
+        self.console.print(
+            Panel(
+                "Your current configuration will be removed.\n"
+                "You will be asked to configure it again\n"
+                "the next time you run [bold cyan]inspire[/].",
+                title="Inspiring Terminal",
+                border_style="yellow",
+                box=box.ROUNDED,
+                padding=(1, 2),
+            ),
+            justify="center",
+        )
+
+        selected_reset = Prompt.ask(
+            "Reset configuration?",
+            choices=["y", "n"],
+            default="n",
+        )
+
+        if selected_reset == "y":
+            return True
+        else:
+            return False
 
     def error(self, text: str) -> None:
         self.console.print(
