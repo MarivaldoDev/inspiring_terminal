@@ -81,6 +81,12 @@ inspire --style simple --no-translate
 
 A tradução das frases depende de um serviço externo e pode eventualmente falhar ou produzir uma tradução que não seja totalmente clara.
 
+### Redefinir configurações
+
+```bash
+inspire reset
+```
+Redefine as configurações do aplicativo para os valores padrão.
 
 ### Ver a versão
 

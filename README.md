@@ -81,6 +81,12 @@ inspire --style simple --no-translate
 
 The translation of the sentences relies on an external service and may occasionally fail or produce a translation that is not entirely clear.
 
+### Reset settings
+
+```bash
+inspire reset
+```
+Resets the application settings to their default values.
 
 ### View version
 
