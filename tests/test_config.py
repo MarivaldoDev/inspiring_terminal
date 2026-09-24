@@ -61,3 +61,26 @@ def test_load_config_calls_first_run_when_file_does_not_exist(
 
     assert result == {"language": "en"}
     first_run_mock.assert_called_once()
+
+
+def test_reset_config_removes_config_file(tmp_path, mocker):
+    config_file = tmp_path / "config.json"
+    config_file.write_text("{}")
+
+    mocker.patch("inspire_term.config.CONFIG_FILE", config_file)
+
+    config.reset_config()
+
+    assert not config_file.exists()
+
+
+def test_reset_config_shows_error_when_config_file_does_not_exist(tmp_path, mocker):
+    config_file = tmp_path / "config.json"
+
+    mocker.patch("inspire_term.config.CONFIG_FILE", config_file)
+
+    console = mocker.patch("inspire_term.ui.ConsoleRenderer")
+
+    config.reset_config()
+
+    console.error("The configuration cannot be reset if there is no (configuration).")

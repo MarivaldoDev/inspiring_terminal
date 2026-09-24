@@ -80,6 +80,60 @@ def test_welcome_message():
     assert "inspire" in content
 
 
+def test_reset_return_true_if_choice_is_y(mocker):
+    renderer = ConsoleRenderer()
+    mock_console = Mock()
+    renderer.console = mock_console
+
+    mocker.patch(
+        "inspire_term.ui.Prompt.ask",
+        return_value="y",
+    )
+
+    result = renderer.screen_reset()
+
+    printed_panel = mock_console.print.call_args[0][0]
+
+    assert isinstance(printed_panel, Panel)
+    assert result is True
+
+
+def test_reset_return_false_if_choice_is_n(mocker):
+    renderer = ConsoleRenderer()
+    mock_console = Mock()
+    renderer.console = mock_console
+
+    mocker.patch(
+        "inspire_term.ui.Prompt.ask",
+        return_value="n",
+    )
+
+    result = renderer.screen_reset()
+
+    printed_panel = mock_console.print.call_args[0][0]
+
+    assert isinstance(printed_panel, Panel)
+    assert not result
+
+
+def test_reset_screen_config(mocker):
+    renderer = ConsoleRenderer()
+    mock_console = Mock()
+    renderer.console = mock_console
+
+    mocker.patch(
+        "inspire_term.ui.Prompt.ask",
+        return_value="y",
+    )
+
+    renderer.screen_reset()
+
+    printed_panel = mock_console.print.call_args[0][0]
+
+    assert printed_panel.title == "Inspiring Terminal"
+    assert printed_panel.border_style == "yellow"
+
+
 def test_show_config_display_table_options(mocker):
     renderer = ConsoleRenderer()
     mock_console = Mock()

@@ -3,7 +3,7 @@ from datetime import date
 import pytest
 import typer
 
-from inspire_term.cli import main
+from inspire_term.cli import main, reset
 from inspire_term.exceptions import QuoteFetchError, TranslationError
 from inspire_term.flow import APP_VERSION, run, version_callback
 from inspire_term.models import Quote, QuoteCacheData
@@ -84,9 +84,7 @@ def test_fetches_and_saves_when_cache_missing(mocker, patched_services, sample_q
     cache.save.assert_called_once()
     saved = cache.save.call_args[0][0]
     assert saved.date == date.today()
-    assert (
-        saved.quotes == sample_quotes.copy()[1:]
-    )  # espera que a citação escolhida tenha sido removida
+    assert saved.quotes == sample_quotes.copy()[1:]
     renderer.show.assert_called_once_with(
         "O sucesso não é definitivo.", "Winston Churchill"
     )
@@ -225,4 +223,32 @@ def test_version_callback_does_nothing_when_false(mocker):
 
     version_callback(False)
 
+    echo.assert_not_called()
+
+
+def test_reset_return_success_message(mocker):
+    console = mocker.Mock()
+    console.screen_reset.return_value = True
+    mocker.patch("inspire_term.cli.ConsoleRenderer", return_value=console)
+    reset_config_mock = mocker.patch("inspire_term.cli.reset_config")
+    echo = mocker.patch("typer.echo")
+
+    reset()
+
+    console.screen_reset.assert_called_once_with()
+    reset_config_mock.assert_called_once_with()
+    echo.assert_called_once_with("Configuration reset successfully.")
+
+
+def test_reset_does_nothing_when_reset_is_cancelled(mocker):
+    console = mocker.Mock()
+    console.screen_reset.return_value = False
+    mocker.patch("inspire_term.cli.ConsoleRenderer", return_value=console)
+    reset_config_mock = mocker.patch("inspire_term.cli.reset_config")
+    echo = mocker.patch("typer.echo")
+
+    reset()
+
+    console.screen_reset.assert_called_once_with()
+    reset_config_mock.assert_not_called()
     echo.assert_not_called()
