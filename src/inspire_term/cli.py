@@ -7,7 +7,7 @@ from inspire_term.flow import run, version_callback
 from inspire_term.ui import ConsoleRenderer
 
 app = typer.Typer(
-    help="Exibe frases inspiradoras no terminal.",
+    help="Displays inspiring quotes in the terminal.",
     add_completion=False,
     context_settings={"help_option_names": ["--help", "-H"]},
 )
@@ -23,18 +23,18 @@ def main(
             "-V",
             callback=version_callback,
             is_eager=True,
-            help="Exibe a versão da aplicação.",
+            help="Displays the application version.",
         ),
     ] = False,
     no_translate: bool = typer.Option(
         False,
         "--no-translate",
-        help="Não traduz a frase para o português.",
+        help="Do not translate the sentence.",
     ),
     style: Literal["default", "simple"] = typer.Option(
         "default",
         "--style",
-        help="Escolhe o estilo de exibição da frase.",
+        help="Choose the display style for the phrase.",
     ),
 ) -> None:
     if ctx.invoked_subcommand is None:
