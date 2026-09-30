@@ -37,6 +37,14 @@ def main(
         help="Choose the display style for the phrase.",
     ),
 ) -> None:
+    """Displays inspiring quotes in the terminal.
+    
+    Args:
+        ctx (typer.Context): The Typer context.
+        version (bool): If True, displays the application version.
+        no_translate (bool): If True, the quote will not be translated.
+        style (Literal["default", "simple"]): The display style for the phrase.
+    """
     if ctx.invoked_subcommand is None:
         run(no_translate=no_translate, style=style)
 

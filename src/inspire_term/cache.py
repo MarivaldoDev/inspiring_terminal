@@ -7,14 +7,17 @@ from inspire_term.models import Quote, QuoteCacheData
 
 
 class QuoteCache:
+    '''Handles caching of quotes to a local JSON file.'''
     def __init__(self, cache_dir: Path | None = None) -> None:
         self.cache_dir = cache_dir or Path.home() / ".cache" / "inspiring-terminal"
         self.cache_file = self.cache_dir / "quote.json"
 
     def ensure_cache_dir(self) -> None:
+        """Ensure the cache directory exists."""
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
     def save(self, cache_data: QuoteCacheData) -> None:
+        """Save the cache data to the cache file."""
         self.ensure_cache_dir()
 
         data = asdict(cache_data)
@@ -29,6 +32,7 @@ class QuoteCache:
             )
 
     def load(self) -> QuoteCacheData | None:
+        """Load the cache data from the cache file."""
         if not self.cache_file.exists():
             return None
 

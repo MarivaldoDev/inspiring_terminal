@@ -9,6 +9,7 @@ CONFIG_FILE = CONFIG_DIR / "config.json"
 
 
 def first_run() -> dict[str, str]:
+    '''Handles the first run of the application and saves the configuration.'''
     console = ConsoleRenderer()
     console.welcome()
 
@@ -33,6 +34,7 @@ def first_run() -> dict[str, str]:
 
 
 def load_config() -> dict[str, str]:
+    '''Load the configuration from the config file or handle the first run.'''
     if not CONFIG_FILE.exists():
         return first_run()
 
@@ -41,6 +43,7 @@ def load_config() -> dict[str, str]:
 
 
 def reset_config() -> None:
+    '''Reset the configuration by deleting the config file.'''
     console = ConsoleRenderer()
 
     if CONFIG_FILE.exists():

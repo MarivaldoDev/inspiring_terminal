@@ -6,11 +6,16 @@ from rich.table import Table
 
 
 class ConsoleRenderer:
+    '''Handles console rendering for the Inspiring Terminal application.
+    Args:
+        style (str): The display style for the phrase. Can be "default" or "simple".
+    '''
     def __init__(self, style: str = "default"):
         self.console = Console()
         self.style = style
 
     def welcome(self) -> None:
+        '''Display a welcome message.'''
         self.console.print(
             Panel(
                 "[bold cyan]Welcome to Inspiring Terminal![/]\n\n"
@@ -26,6 +31,11 @@ class ConsoleRenderer:
         )
 
     def show(self, text: str, author: str) -> None:
+        '''Display the quote and author in the console.
+        Args:
+            text (str): The quote text.
+            author (str): The author of the quote.
+        '''
         if self.style == "simple":
             self.console.print(f"[bold bright_yellow]{text}[/]")
             self.console.print(f"[italic cyan]— {author}[/]")
@@ -82,6 +92,10 @@ class ConsoleRenderer:
         return selected_language
 
     def screen_reset(self) -> bool:
+        '''Display a confirmation screen for resetting the configuration.
+        Returns:
+            bool: True if the user confirms the reset, False otherwise.
+        '''
         self.console.print(
             Panel(
                 "Your current configuration will be removed.\n"
@@ -107,6 +121,10 @@ class ConsoleRenderer:
             return False
 
     def error(self, text: str) -> None:
+        '''Display an error message in the console.
+        Args:
+            text (str): The error message to display.
+        '''
         self.console.print(
             Panel(
                 f"[bold red]{text}[/]",

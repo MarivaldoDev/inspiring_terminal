@@ -17,6 +17,11 @@ APP_VERSION = version("inspiring-terminal")
 
 
 def run(no_translate: bool = False, style: str = "default") -> None:
+    '''Main function to run the application.
+    Args:
+        no_translate (bool): If True, the quote will not be translated.
+        style (str): The display style for the phrase.    
+    '''
     config = load_config()
     renderer = ConsoleRenderer(style=style)
     quote_service = QuoteService()
@@ -76,6 +81,10 @@ def run(no_translate: bool = False, style: str = "default") -> None:
 
 
 def version_callback(value: bool) -> None:
+    '''Callback function to display the application version.
+    Args:
+        value (bool): If True, the version will be displayed.
+    '''
     if value:
         typer.echo(f"inspiring-terminal {APP_VERSION}")
         raise typer.Exit()

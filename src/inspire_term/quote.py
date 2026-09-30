@@ -8,6 +8,7 @@ from inspire_term.models import Quote
 
 
 class QuoteService:
+    '''Service to fetch quotes from an external API.'''
     url = "https://zenquotes.io/api/quotes/"
 
     def __init__(self) -> None:
@@ -39,6 +40,7 @@ class QuoteService:
         self.session.mount("http://", adapter)
 
     def get_quotes(self) -> list[Quote]:
+        '''Fetch quotes from the external API.'''
         try:
             response = self.session.get(self.url, timeout=(3.05, 10))
             response.raise_for_status()
